@@ -19,10 +19,13 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import AdminOrderDetails from "./pages/admin/AdminOrderDetails";
 import AdminChats from "./pages/admin/AdminChats";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductList />} />
@@ -52,6 +55,7 @@ function App() {
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
