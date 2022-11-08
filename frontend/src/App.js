@@ -21,26 +21,30 @@ import AdminChats from "./pages/admin/AdminChats";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
+import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product-list" element={<ProductList />} />
-        <Route path="/product-details" element={<ProductDetails />} />
-        <Route path="/product-details/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element="Page Not Found 404" />
+        <Route element={<RoutesWithUserChatComponent />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/product-list" element={<ProductList />} />
+          <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element="Page Not Found 404" />
+        </Route>
 
-        <Route element={<ProtectedRoutesComponent admin={false} />}>
-          <Route path="/user" element={<UserProfile />} />
-          <Route path="/user/my-orders" element={<UserOrderPage />} />
-          <Route path="/user/cart-details" element={<UserCartDetails />} />
-          <Route path="/user/order-details" element={<UserOrderDetails />} />
+          <Route element={<ProtectedRoutesComponent admin={false} />}>
+            <Route path="/user" element={<UserProfile />} />
+            <Route path="/user/my-orders" element={<UserOrderPage />} />
+            <Route path="/user/cart-details" element={<UserCartDetails />} />
+            <Route path="/user/order-details" element={<UserOrderDetails />} />
+
         </Route>
 
         <Route element={<ProtectedRoutesComponent admin={true} />}>
