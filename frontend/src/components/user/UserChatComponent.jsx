@@ -21,7 +21,7 @@ const UserChatComponent = () => {
             <p className='bg-primary p-3 ms-4 text-light rounded-pill'><b>Support wrote:</b>Bro, do you even order?</p>
           </div>
           <textarea name="chatMessage" id="clientChatMsg" cols="20" rows="2" className="form-control" placeholder='Your Text Message'></textarea>
-          <button className="btn btn-success btn-blocl">Submit</button>
+          <button className="btn btn-success btn-block">Submit</button>
         </div>
       </div>
     </>
