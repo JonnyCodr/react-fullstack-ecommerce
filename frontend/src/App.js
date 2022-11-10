@@ -22,7 +22,7 @@ import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
-import ScrollToTop from "./utils/scrollToTop";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   return (
