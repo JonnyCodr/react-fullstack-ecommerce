@@ -18,16 +18,16 @@ const ProductList = () => {
       <Row>
         <Col md={3}>
           <ListGroup variant="flush">
-            <ListGroup.Item><SortOptionsComponent /></ListGroup.Item>
-            <ListGroup.Item><PriceFilterComponent /></ListGroup.Item>
+            <ListGroup.Item className='mb-3 mt-3'><SortOptionsComponent /></ListGroup.Item>
+            <ListGroup.Item>Filter<br /><PriceFilterComponent /></ListGroup.Item>
             <ListGroup.Item><RatingFilterComponent /></ListGroup.Item>
             <ListGroup.Item><CategoryFilterComponent /></ListGroup.Item>
             <ListGroup.Item>
               <AttributesFilterComponent />
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button variant="primary">Primary</Button>
-              <Button variant="danger">Danger</Button>
+              <Button variant="primary">Filter</Button>
+              <Button variant="danger">Reset Filters</Button>
             </ListGroup.Item>
           </ListGroup>
         </Col>
