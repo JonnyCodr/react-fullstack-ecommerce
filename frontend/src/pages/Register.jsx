@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import {Alert, InputGroup, Spinner} from "react-bootstrap";
+import {Alert, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const Register = () => {
