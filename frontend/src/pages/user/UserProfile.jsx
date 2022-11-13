@@ -119,13 +119,6 @@ const UserProfile = () => {
                 defaultValue=''
               />
             </Form.Group>
-
-
-
-
-
-
-
             <Form.Group className={'mb-3'} controlId="FormBasicPassword">
               <Form.Label>Your password</Form.Label>
               <Form.Control
