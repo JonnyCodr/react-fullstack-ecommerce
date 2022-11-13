@@ -49,9 +49,6 @@ const UserOrderDetails = () => {
               ))
             }
           </ListGroup>
-
-
-
         </Col>
         <Col md={4}>
           <ListGroup>
