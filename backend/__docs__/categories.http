@@ -17,4 +17,12 @@ Accept: application/json
 DELETE http://localhost:9000/api/categories/Games2
 Accept: application/json
 
+###Create new category attributes
+POST http://localhost:9000/api/categories/attr
+Content-Type: application/json
 
+{
+  "key": "color",
+  "val": "purple",
+  "categoryChosen": "Computers"
+}
