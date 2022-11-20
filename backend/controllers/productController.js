@@ -4,8 +4,30 @@ const recordsPerPage = require("../config/pagination");
 
 const GetProducts = async (req, res, next) =>{
   try {
+    let queryCondition = false;
+    let query = {};
+    let priceQueryCondition = {};
+    let ratingQueryCondition = {};
+
+    if (req.query.price) {
+      queryCondition = true;
+      priceQueryCondition = { price: { $lte: req.query.price } };
+    }
+    if (req.query.rating) {
+      queryCondition = true;
+      ratingQueryCondition = { rating: { $in: req.query.rating.split(',') } };
+    }
+
+    if (queryCondition) {
+      query = {
+        $and: [priceQueryCondition, ratingQueryCondition]
+      }
+    }
+
+    console.log(query);
+
+    // pagination
     const pageNum = parseInt(req.query.pageNum) || 1;
-    const totalProducts = await Product.countDocuments({});
 
     // sort by name, price, etc
     let sort = {};
@@ -15,7 +37,8 @@ const GetProducts = async (req, res, next) =>{
       sort = {[sortOptionArray[0]]: Number(sortOptionArray[1])};
     }
 
-    const allProducts = await Product.find({})
+    const totalProducts = await Product.countDocuments(query);
+    const allProducts = await Product.find(query)
       .skip(recordsPerPage * (pageNum - 1))
       .sort(sort)
       .limit(recordsPerPage);
