@@ -1,3 +1,12 @@
+###Create a new category
+POST http://localhost:9000/api/categories
+Content-Type: application/json
+
+{
+  "name": "New Category2",
+  "category": "Games2"
+}
+
 ### Get All Categories
 GET http://localhost:9000/api/categories
 Accept: application/json

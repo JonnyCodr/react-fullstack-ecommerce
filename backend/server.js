@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const port = 9000;
 
+app.use(express.json());
+
 const apiRoutes = require("./routes/apiRoutes");
 
-app.get("/", async (req, res, next) => {
+app.get("/", async ( req, res ) => {
   res.json({ message: "Sup" });
 });
 
