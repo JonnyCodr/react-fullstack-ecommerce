@@ -1,0 +1,5 @@
+### Get All Categories
+GET http://localhost:9000/api/categories
+Accept: application/json
+
+
