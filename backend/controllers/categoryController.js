@@ -27,7 +27,20 @@ const NewCategory = async (req, res, next) => {
   }
 }
 
+const DeleteCategory = async (req, res, next) => {
+  try {
+    if (req.params.category !== 'Choose Category') {
+      const categoryExists = await Category.findOne({name: req.params.category}).orFail();
+      await categoryExists.remove();
+      res.status(204).json({ message: 'Category deleted' });
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   GetCategories,
-  NewCategory
+  NewCategory,
+  DeleteCategory
 };

@@ -12,3 +12,9 @@ GET http://localhost:9000/api/categories
 Accept: application/json
 
 
+
+### Delete a Category
+DELETE http://localhost:9000/api/categories/Games2
+Accept: application/json
+
+
