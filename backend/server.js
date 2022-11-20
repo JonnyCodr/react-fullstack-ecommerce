@@ -1,27 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 9000
+const express = require("express");
+const app = express();
+const port = 9000;
 
-const apiRoutes = require('./routes/apiRoutes')
+const apiRoutes = require("./routes/apiRoutes");
 
+app.get("/", async (req, res, next) => {
+  res.json({ message: "Sup" });
+});
 
-app.get('/', (req, res) => {
-  res.send('sup...')
-})
+const connectDB = require("./config/db");
+connectDB();
 
-const connectDB = require('./config/db')
-connectDB()
+app.use("/api", apiRoutes);
 
-app.use('/api', apiRoutes)
-
-app.use((error, req, res, next) => {
+app.use((error, req, res ) => {
   res.status(500).json({
     message: error.message,
-    stack: error.stack
-  })
-})
-
+    stack: error.stack,
+  });
+});
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`)
-})
+  console.log(`listening on port ${port}`);
+});
