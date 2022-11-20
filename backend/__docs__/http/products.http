@@ -1,0 +1,5 @@
+### Get all Products
+GET http://localhost:9000/api/products?pageNum=3&sort=price_-1
+Accept: application/json
+
+
