@@ -1,5 +1,49 @@
-### Get all Products
+### Get all Products with pagination sorting and filtering
 GET http://localhost:9000/api/products?pageNum=3&sort=price_-1&rating=3,4,5
+Accept: application/json
+
+### Get all Products with pagination sorting
+GET http://localhost:9000/api/products?pageNum=3&sort=price_-1
+Accept: application/json
+
+### Get all Products with pagination
+GET http://localhost:9000/api/products?pageNum=1
+Accept: application/json
+
+### Get all Products with sorting by name desc
+GET http://localhost:9000/api/products?sort=name_-1
+Accept: application/json
+
+### Get all Products with rating 3,4,5 stars
+GET http://localhost:9000/api/products?rating=3,4,5
+Accept: application/json
+
+### Get all Products with rating 5 stars
+GET http://localhost:9000/api/products?rating=5
+Accept: application/json
+
+### Get all Products for a particular category
+GET http://localhost:9000/api/products/category/Tablets
+Accept: application/json
+
+### Get all Products for a particular category sorted by price desc
+GET http://localhost:9000/api/products/category/Tablets?sort=price_-1
+Accept: application/json
+
+### Get all Products for a particular category via query param sorted by price desc
+GET http://localhost:9000/api/products?category=Tablets&sort=price_-1
+Accept: application/json
+
+### Get all Products for a particular category via attributes
+GET http://localhost:9000/api/products?attrs=RAM-1TB-2TB,color-blue-red-black
+Accept: application/json
+
+### Get all Products for a particular category via attributes
+GET http://localhost:9000/api/products/search/Product Description
+Accept: application/json
+
+### Get a Product by id
+GET http://localhost:9000/api/products/6379b859324233230d1d0071
 Accept: application/json
 
 
