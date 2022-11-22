@@ -192,9 +192,29 @@ const AdminGetProducts = async (req, res, next) => {
   }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
+const AdminDeleteProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id).orFail();
+    await product.remove();
+    res.json({ message: "Product deleted successfully" });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   GetProducts,
   GetProductById,
   GetBestSellers,
-  AdminGetProducts
+  AdminGetProducts,
+  AdminDeleteProduct
 };
