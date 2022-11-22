@@ -5,7 +5,8 @@ const {
   GetProductById,
   GetBestSellers,
   AdminGetProducts,
-  AdminDeleteProduct
+  AdminDeleteProduct,
+  AdminCreateProduct
 } = require("../controllers/productController");
 
 router.get('/category/:categoryName/search/:searchQuery', GetProducts);
@@ -16,6 +17,7 @@ router.get("/bestsellers", GetBestSellers);
 router.get("/:id", GetProductById);
 
 router.get("/admin", AdminGetProducts);
-router.get("/admin/:id", AdminDeleteProduct);
+router.delete("/admin/:id", AdminDeleteProduct);
+router.post("/admin", AdminCreateProduct);
 
 module.exports = router;

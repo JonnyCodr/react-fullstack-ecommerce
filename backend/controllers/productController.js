@@ -211,10 +211,46 @@ const AdminDeleteProduct = async (req, res, next) => {
   }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
+const AdminCreateProduct = async (req, res, next ) => {
+  try {
+    const product = new Product();
+    const { name, description, count, price, category, attributesTable } = req.body;
+    product.name = name;
+    product.description = description;
+    product.count = count;
+    product.price = price;
+    product.category = category;
+
+    if (attributesTable.length > 0) {
+      attributesTable.map((item) => {
+        product.attr.push({
+          key: item.key,
+          value: item.value,
+        });
+      })
+    }
+
+    await product.save();
+    res.json({ message: "Product created successfully", productId: product._id });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   GetProducts,
   GetProductById,
   GetBestSellers,
   AdminGetProducts,
-  AdminDeleteProduct
+  AdminDeleteProduct,
+  AdminCreateProduct
 };

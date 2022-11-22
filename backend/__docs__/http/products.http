@@ -46,4 +46,18 @@ Accept: application/json
 GET http://localhost:9000/api/products/6379b859324233230d1d0071
 Accept: application/json
 
+### Admin Create Product
+POST http://localhost:9000/api/products/admin
+Content-Type: application/json
 
+{
+  "name":"Product Name",
+  "description":"Product Description",
+  "count":10,
+  "price":100,
+  "category":"Tablets",
+  "attributesTable":[
+    {"key":"color", "value":"black"},
+    {"key":"RAM", "value":"1TB"}
+  ]
+}
