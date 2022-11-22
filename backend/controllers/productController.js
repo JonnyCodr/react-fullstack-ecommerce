@@ -1,6 +1,14 @@
 const Product = require("../models/ProductModel");
 const recordsPerPage = require("../config/pagination");
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<void>}
+ * @constructor
+ */
 const GetProducts = async (req, res, next) => {
   console.log("req.params: ", req.params);
   console.log("req.query: ", req.query);
@@ -121,6 +129,14 @@ const GetProducts = async (req, res, next) => {
   }
 };
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<void>}
+ * @constructor
+ */
 const GetProductById = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id).populate('reviews').orFail();
@@ -132,6 +148,14 @@ const GetProductById = async (req, res, next) => {
 
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<void>}
+ * @constructor
+ */
 const GetBestSellers = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
@@ -148,4 +172,29 @@ const GetBestSellers = async (req, res, next) => {
   }
 }
 
-module.exports = {GetProducts, GetProductById, GetBestSellers};
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
+const AdminGetProducts = async (req, res, next) => {
+  try {
+    const products = await Product.find({})
+      .sort({category: 1})
+      .select({ name: 1, category: 1, price: 1 })
+
+    return res.json(products);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {
+  GetProducts,
+  GetProductById,
+  GetBestSellers,
+  AdminGetProducts
+};
