@@ -13,14 +13,14 @@ const NewCategory = async (req, res, next) => {
   try {
     const { category } = req.body;
     if (!category) {
-      res.status(400).json({ message: 'Please provide a category' });
+      res.json({ message: 'Please provide a category' });
     }
     const foundCategory = await Category.findOne({name: category})
     if (foundCategory) {
-      res.status(400).json({ message: 'Category already exists' });
+      res.json({ message: 'Category already exists' });
     } else {
       const newCategory = await Category.create({ name: category });
-      res.status(201).send({newCategory});
+      res.send({newCategory});
     }
   } catch (error) {
     next(error);
@@ -32,7 +32,7 @@ const DeleteCategory = async (req, res, next) => {
     if (req.params.category !== 'Choose Category') {
       const categoryExists = await Category.findOne({name: req.params.category}).orFail();
       await categoryExists.remove();
-      res.status(204).json({ message: 'Category deleted' });
+      res.json({ message: 'Category deleted' });
     }
   } catch (error) {
     next(error);
@@ -42,7 +42,7 @@ const DeleteCategory = async (req, res, next) => {
 const SaveAttr = async (req, res, next) => {
   const {key, val, categoryChosen} = req.body
   if (!key || !val || !categoryChosen) {
-    return res.status(400).send("All inputs are required")
+    return res.send("All inputs are required")
   }
 
   try {
@@ -70,7 +70,7 @@ const SaveAttr = async (req, res, next) => {
     }
     await categoryExists.save()
     let cat = await Category.find({}).sort({name: "asc"})
-    return res.status(201).json({categoriesUpdated: cat})
+    return res.json({categoriesUpdated: cat})
   } catch(err) {
     next(err)
   }

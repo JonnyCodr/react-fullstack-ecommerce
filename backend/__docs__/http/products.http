@@ -61,3 +61,27 @@ Content-Type: application/json
     {"key":"RAM", "value":"1TB"}
   ]
 }
+
+### Admin Create Product
+PUT http://localhost:9000/api/products/admin/6379b859324233230d1d0071
+Content-Type: application/json
+
+{
+  "name":"Product Name Updated",
+  "description":"Product Description Updated",
+  "count":10,
+  "price":100,
+  "category":"Tablets",
+  "attributesTable":[
+    {"key":"color", "value":"black"},
+    {"key":"RAM", "value":"1TB"}
+  ]
+}
+
+### Admin Upload Product Image
+PUT http://localhost:9000/api/products/admin/upload
+Content-Type: application/json
+
+{
+
+}

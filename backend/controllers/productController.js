@@ -246,11 +246,53 @@ const AdminCreateProduct = async (req, res, next ) => {
   }
 }
 
+const AdminUpdateProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id).orFail();
+    const { name, description, count, price, category, attributesTable } = req.body;
+    product.name = name || product.name;
+    product.description = description || product.description;
+    product.count = count || product.count;
+    product.price = price || product.price;
+    product.category = category || product.category;
+
+    if (attributesTable.length > 0) {
+      product.attr = [];
+      attributesTable.map((item) => {
+        product.attr.push({
+          key: item.key,
+          value: item.value,
+        });
+      })
+    } else {
+      product.attr = [];
+    }
+    await product.save();
+    res.json({ message: "Product updated successfully", productId: product._id });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+const AdminUpload = async (req, res, next) => {
+  try {
+    if (!req.files || req.files.images === false) {
+      return res.json({ message: "No file uploaded" });
+    }
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   GetProducts,
   GetProductById,
   GetBestSellers,
   AdminGetProducts,
   AdminDeleteProduct,
-  AdminCreateProduct
+  AdminCreateProduct,
+  AdminUpdateProduct,
+  AdminUpload
 };

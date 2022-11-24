@@ -16,7 +16,7 @@ connectDB();
 app.use("/api", apiRoutes);
 
 app.use((error, req, res ) => {
-  res.status(500).json({
+  res.json({
     message: error.message,
     stack: error.stack,
   });
