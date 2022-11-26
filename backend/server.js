@@ -1,8 +1,11 @@
 const express = require("express");
+const fileUpload = require("express-fileupload");
+
 const app = express();
 const port = 9000;
 
 app.use(express.json());
+app.use(fileUpload());
 
 const apiRoutes = require("./routes/apiRoutes");
 
@@ -15,12 +18,12 @@ connectDB();
 
 app.use("/api", apiRoutes);
 
-app.use((error, req, res ) => {
-  res.json({
-    message: error.message,
-    stack: error.stack,
-  });
-});
+// app.use((error, req, res ) => {
+//   res.json({
+//     message: error.message,
+//     stack: error.stack,
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

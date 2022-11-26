@@ -62,7 +62,10 @@ Content-Type: application/json
   ]
 }
 
-### Admin Create Product
+###
+# @name Admin Update Product
+# @description Admin Create Product
+# @param {string} productId - Product Id to update
 PUT http://localhost:9000/api/products/admin/6379b859324233230d1d0071
 Content-Type: application/json
 
@@ -78,10 +81,16 @@ Content-Type: application/json
   ]
 }
 
-### Admin Upload Product Image
-PUT http://localhost:9000/api/products/admin/upload
+###
+# @name Admin Upload Product Image
+# @description Admin Upload Product Image
+POST http://localhost:9000/api/products/admin/upload
 Content-Type: application/json
 
 {
 
 }
+
+### Admin Get All Products
+GET http://localhost:9000/api/products/admin
+Content-Type: application/json

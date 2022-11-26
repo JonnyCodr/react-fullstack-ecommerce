@@ -8,7 +8,8 @@ const {
   AdminDeleteProduct,
   AdminCreateProduct,
   AdminUpdateProduct,
-  AdminUpload
+  AdminUpload,
+  AdminDeleteImage,
 } = require("../controllers/productController");
 
 router.get('/category/:categoryName/search/:searchQuery', GetProducts);
@@ -21,8 +22,10 @@ router.get("/:id", GetProductById);
 // Admin routes
 router.get("/admin", AdminGetProducts);
 router.delete("/admin/:id", AdminDeleteProduct);
+router.delete("/admin/:imagePath/:id", AdminDeleteImage);
+router.put("/admin/:id", AdminUpdateProduct);
 router.post("/admin", AdminCreateProduct);
-router.post("/admin/:id", AdminUpdateProduct);
 router.post("/admin/upload", AdminUpload);
+
 
 module.exports = router;
