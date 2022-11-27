@@ -173,6 +173,9 @@ const UpdateUserProfile = async (req, res, next) => {
 
 const WriteReview = async (req, res, next) => {
   try {
+
+    const session = await Review.startSession();
+
     // get comment, rating from request.body:
     const { comment, rating } = req.body;
     // validate request:
@@ -184,6 +187,7 @@ const WriteReview = async (req, res, next) => {
     const ObjectId = require("mongodb").ObjectId;
     let reviewId = ObjectId();
 
+    session.startTransaction()
     await Review.create([
       {
         _id: reviewId,
@@ -191,12 +195,14 @@ const WriteReview = async (req, res, next) => {
         rating: Number(rating),
         user: { _id: req.user._id, name: req.user.name + " " + req.user.lastName },
       }
-    ])
+    ], session, session)
 
-    const product = await Product.findById(req.params.productId).populate("reviews");
+    const product = await Product.findById(req.params.productId).populate("reviews").session(session);
 
     const alreadyReviewed = product.reviews.find((r) => r.user._id.toString() === req.user._id.toString());
     if (alreadyReviewed) {
+      await session.abortTransaction();
+      await session.endSession();
       return res.status(400).send("product already reviewed");
     }
 
@@ -212,8 +218,11 @@ const WriteReview = async (req, res, next) => {
     }
     await product.save();
 
+    await session.commitTransaction();
+    await session.endSession();
     res.send('review created')
   } catch (err) {
+    await session.abortTransaction()
     next(err)
   }
 }
