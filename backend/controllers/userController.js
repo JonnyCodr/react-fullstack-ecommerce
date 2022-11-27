@@ -119,12 +119,13 @@ const LoginUser = async (req, res, next) => {
   }
 }
 
+
 const GetUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).orFail();
     return res.send(user);
-  } catch (err) {
-    next(err);
+  } catch(err) {
+    next(err)
   }
 }
 
