@@ -1,7 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { GetUsers, RegisterUser, LoginUser, UpdateUserProfile, GetUserProfile, WriteReview } = require("../controllers/userController");
 const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
+const {
+  GetUsers,
+  RegisterUser,
+  LoginUser,
+  UpdateUserProfile,
+  GetUserProfile,
+  WriteReview,
+  AdminGetUser,
+} = require("../controllers/userController");
 
 
 
@@ -17,5 +25,6 @@ router.post('/review/:productId', WriteReview);
 //Admin Routes
 router.use(verifyIsAdmin);
 router.get("/", GetUsers);
+router.get("/:id", AdminGetUser);
 
 module.exports = router;

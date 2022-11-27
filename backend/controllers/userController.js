@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../utils/hashPassword");
 const { generateAuthToken } = require("../utils/generateAuthToken");
 const Review = require("../models/ReviewsModel");
-const {ObjectId} = require("mongodb");
+const { ObjectId } = require("mongodb");
 const Product = require("../models/ProductModel");
 
 /**
@@ -122,7 +122,14 @@ const LoginUser = async (req, res, next) => {
   }
 }
 
-
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
 const GetUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).orFail();
@@ -171,10 +178,17 @@ const UpdateUserProfile = async (req, res, next) => {
   }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
 const WriteReview = async (req, res, next) => {
+  const session = await Review.startSession();
   try {
-
-    const session = await Review.startSession();
 
     // get comment, rating from request.body:
     const { comment, rating } = req.body;
@@ -227,6 +241,25 @@ const WriteReview = async (req, res, next) => {
   }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<void>}
+ * @constructor
+ */
+const AdminGetUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .select('name lastName email isAdmin')
+      .orFail();
+    return res.status(200).send(user);
+  } catch (err) {
+    next(err)
+  }
+ }
+
 module.exports = {
   GetUsers,
   RegisterUser,
@@ -234,4 +267,5 @@ module.exports = {
   UpdateUserProfile,
   GetUserProfile,
   WriteReview,
+  AdminGetUser,
 };
