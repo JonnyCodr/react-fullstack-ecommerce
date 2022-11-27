@@ -286,6 +286,18 @@ const AdminGetUser = async (req, res, next) => {
    }
  }
 
+/**
+ * @description Endpoint for admin to delete a user by their id
+ * @async
+ * @param {Object} req
+ * @param {Object} res
+ * @param {function} next
+ * @return {Promise<void>}
+ * @version 1.0.0
+ * @since 1.0.0
+ * @Author Michael Menard
+ * @repository
+ */
  const AdminDeleteUser = async (req, res, next) => {
    try {
      const user = await User.findById(req.params.id).orFail();
