@@ -2,16 +2,32 @@ const User = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../utils/hashPassword");
 const { generateAuthToken } = require("../utils/generateAuthToken");
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
 const GetUsers = async (req, res, next) => {
   try {
     const users = await User.find({}).select("");
-    return res.json(users);
+    return res.send(users);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
 const RegisterUser = async (req, res, next) => {
   try {
     const { name, lastName, email, password } = req.body;
@@ -53,6 +69,14 @@ const RegisterUser = async (req, res, next) => {
   }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<*>}
+ * @constructor
+ */
 const LoginUser = async (req, res, next) => {
   try {
     const { email, password, doNotLogout } = req.body;
@@ -95,8 +119,58 @@ const LoginUser = async (req, res, next) => {
   }
 }
 
+const GetUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).orFail();
+    return res.send(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @return {Promise<void>}
+ */
+const UpdateUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id).orFail();
+    user.name = req.body.name || user.name;
+    user.lastName = req.body.lastName || user.lastName;
+    user.email = req.body.email || user.email;
+    user.phoneNumber = req.body.phoneNumber;
+    user.address = req.body.address;
+    user.country = req.body.country;
+    user.zipCode = req.body.zipCode;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    if (req.body.password !== user.password) {
+      user.password = hashPassword(req.body.password);
+    }
+    await user.save();
+
+    res.json({
+      success: "user updated",
+      userUpdated: {
+        _id: user._id,
+        name: user.name,
+        lastName: user.lastName,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   GetUsers,
   RegisterUser,
   LoginUser,
+  UpdateUserProfile,
+  GetUserProfile,
 };

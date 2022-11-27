@@ -2,26 +2,27 @@ const jwt = require('jsonwebtoken');
 
 const verifyIsLoggedIn = (req, res, next) => {
   try {
-    const token = req.cookies.access_token;
-    if (!token) {
-      return res.status(403).send("Unauthorized: No token provided");
+    const token = req.cookies.access_token
+    if(!token) {
+      return res.status(403).send("A token is required for authentication")
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'uspersecret');
-      req.user = decoded;
-      next();
-
-    } catch (error) {
-      return res.status(403).send("Unauthorized: Invalid token");
+      const decoded = jwt.verify(token, 'supersecret')
+      req.user = decoded
+      next()
+    } catch (err) {
+      return res.status(401).send("Unauthorized. Invalid Token")
     }
-    next();
-  } catch (error) {
-    next(error);
+
+  } catch(err) {
+    next(err)
   }
 }
 
 const verifyIsAdmin = (req, res, next) => {
+  console.log('user', req.user)
+  console.log('user is admin', req.user.isAdmin)
   try {
     if (req.user && req.user.isAdmin) {
       next();
