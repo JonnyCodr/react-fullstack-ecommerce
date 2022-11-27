@@ -1,4 +1,6 @@
 const express = require("express");
+const { verifyIsLoggedIn } = require("../middleware/verifyAuthToken");
+
 const router = express.Router();
 const {
   GetProducts,
@@ -20,6 +22,7 @@ router.get("/bestsellers", GetBestSellers);
 router.get("/:id", GetProductById);
 
 // Admin routes
+router.use(verifyIsLoggedIn);
 router.get("/admin", AdminGetProducts);
 router.delete("/admin/:id", AdminDeleteProduct);
 router.delete("/admin/:imagePath/:id", AdminDeleteImage);
