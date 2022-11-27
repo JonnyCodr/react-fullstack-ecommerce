@@ -9,6 +9,8 @@ const {
   GetUserProfile,
   WriteReview,
   AdminGetUser,
+  AdminUpdateUser,
+  AdminDeleteUser,
 } = require("../controllers/userController");
 
 
@@ -26,5 +28,7 @@ router.post('/review/:productId', WriteReview);
 router.use(verifyIsAdmin);
 router.get("/", GetUsers);
 router.get("/:id", AdminGetUser);
+router.put("/:id", AdminUpdateUser);
+router.delete("/:id", AdminDeleteUser);
 
 module.exports = router;
