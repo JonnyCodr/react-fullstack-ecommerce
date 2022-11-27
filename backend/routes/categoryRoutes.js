@@ -1,4 +1,8 @@
 const express = require("express");
+
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
+
+
 const router = express.Router();
 const {
   NewCategory,
@@ -8,6 +12,10 @@ const {
 } = require("../controllers/categoryController");
 
 router.get("/", GetCategories);
+
+//Admin routes
+router.use(verifyIsLoggedIn);
+router.use(verifyIsAdmin);
 router.post("/", NewCategory);
 router.delete("/:category", DeleteCategory);
 router.post("/attr", SaveAttr);

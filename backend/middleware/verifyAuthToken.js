@@ -21,5 +21,17 @@ const verifyIsLoggedIn = (req, res, next) => {
   }
 }
 
+const verifyIsAdmin = (req, res, next) => {
+  try {
+    if (req.user && req.user.isAdmin) {
+      next();
+    } else {
+      return res.status(401).send("Unauthorized: You are not an admin");
+    }
+  } catch (error) {
+    next(error);
+  }
+}
 
-module.exports = { verifyIsLoggedIn };
+
+module.exports = { verifyIsLoggedIn, verifyIsAdmin };

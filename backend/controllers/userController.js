@@ -4,7 +4,7 @@ const { generateAuthToken } = require("../utils/generateAuthToken");
 
 const GetUsers = async (req, res, next) => {
   try {
-    const users = await User.find({}).select("-password");
+    const users = await User.find({}).select("");
     return res.json(users);
   } catch (error) {
     console.log(error);
