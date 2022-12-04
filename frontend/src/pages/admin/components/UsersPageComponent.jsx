@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Table} from "react-bootstrap";
@@ -6,8 +6,9 @@ import Button from "react-bootstrap/Button";
 import {LinkContainer} from "react-router-bootstrap";
 import AdminLinks from "../../../components/admin/AdminLinks";
 
-const UsersPageComponent = ({ fetchUsers }) => {
-    const [users, setUsers] = React.useState([]);
+const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
+    const [users, setUsers] = useState([]);
+    const [userDeleted, setUserDeleted] = useState(false);
 
     useEffect(() => {
         // const abortController = new AbortController();
@@ -17,10 +18,15 @@ const UsersPageComponent = ({ fetchUsers }) => {
             //     err.response ? err.response.data : err.message
             // ));
         // return () => abortController.abort();
-    }, []);
+    }, [ userDeleted ]);
 
-    const deleteHandler = () => {
-        if(window.confirm("Are you sure?")) alert("User deleted!");
+    const deleteHandler = async (userId) => {
+        if(window.confirm("Are you sure?")) {
+            const data = await deleteUser(userId);
+            if(data === 'user deleted') {
+                setUserDeleted(!userDeleted);
+            }
+        }
     }
 
     return (
@@ -62,7 +68,7 @@ const UsersPageComponent = ({ fetchUsers }) => {
                                         </Button>
                                     </LinkContainer>
                                     {" / "}
-                                    <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(user._id)}>
                                         <i className="bi bi-x-circle"></i>
                                     </Button>
                                 </td>

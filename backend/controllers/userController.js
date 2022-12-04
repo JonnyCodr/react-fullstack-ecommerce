@@ -302,7 +302,7 @@ const AdminGetUser = async (req, res, next) => {
    try {
      const user = await User.findById(req.params.id).orFail();
      await user.remove();
-      res.send("user deleted");
+     res.send("user deleted");
    } catch (err) {
      next(err);
    }
