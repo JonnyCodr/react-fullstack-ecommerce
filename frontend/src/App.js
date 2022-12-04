@@ -10,7 +10,6 @@ import UserOrderPage from "./pages/user/UserOrderPage";
 import UserCartDetails from "./pages/user/UserCartDetails";
 import UserOrderDetails from "./pages/user/UserOrderDetails";
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
-import AdminUser from "./pages/admin/AdminUser";
 import AdminEditUser from "./pages/admin/AdminEditUser";
 import AdminCreateProductPage from "./pages/admin/AdminCreateProductPage";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
@@ -23,6 +22,7 @@ import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 import ScrollToTop from "./utils/ScrollToTop";
+import AdminUsersPage from "./pages/admin/AdminUser";
 
 function App() {
   return (
@@ -50,7 +50,7 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoutesComponent admin={true} />}>
-          <Route path="/admin/users" element={<AdminUser />} />
+          <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/edit-user" element={<AdminEditUser />} />
           <Route path="/admin/products" element={<AdminProductsPage />} />
           <Route path="/admin/create-new-product" element={<AdminCreateProductPage />} />

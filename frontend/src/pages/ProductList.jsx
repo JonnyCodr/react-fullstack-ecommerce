@@ -12,6 +12,8 @@ import AttributesFilterComponent from "../components/filterQueryResultOptions/At
 import Button from "react-bootstrap/Button";
 import ProductForListComponent from "../components/ProductForListComponent";
 
+import axios from 'axios';
+
 const ProductList = () => {
   return (
     <Container fluid>
