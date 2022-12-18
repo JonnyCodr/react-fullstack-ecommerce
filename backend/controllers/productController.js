@@ -176,7 +176,7 @@ const GetBestSellers = async (req, res, next) => {
 }
 
 /**
- *
+ * Gets all products for Admin User
  * @param req
  * @param res
  * @param next
@@ -184,15 +184,18 @@ const GetBestSellers = async (req, res, next) => {
  * @constructor
  */
 const AdminGetProducts = async (req, res, next) => {
-  try {
-    const products = await Product.find({})
-      .sort({category: 1})
-      .select({ name: 1, category: 1, price: 1 })
 
-    return res.json(products);
-  } catch (error) {
-    next(error);
-  }
+  // try {
+    // const products = await Product.find({})
+    //   .sort({category: 1})
+    //   .select({ name: 1, category: 1, price: 1 });
+    //
+    // console.log('products:', products);
+
+    return res.json("Admin get products endpoint");
+  // } catch (error) {
+  //   next(error);
+  // }
 }
 
 /**

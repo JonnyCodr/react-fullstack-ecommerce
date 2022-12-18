@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './pages/Home';
-import ProductList from "./pages/ProductList";
+import ProductListPage from "./pages/ProductListPage";
 import ProductDetails from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route element={<RoutesWithUserChatComponent />}>
           <Route path="/" element={<Home />} />
-          <Route path="/product-list" element={<ProductList />} />
+          <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/product-details/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />

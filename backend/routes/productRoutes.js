@@ -19,7 +19,7 @@ router.get("/category/:categoryName", GetProducts);
 router.get("/search/:searchQuery", GetProducts);
 router.get("/", GetProducts);
 router.get("/bestsellers", GetBestSellers);
-router.get("/:id", GetProductById);
+// router.get("/:id", GetProductById);
 
 // Admin routes
 router.use(verifyIsLoggedIn);
