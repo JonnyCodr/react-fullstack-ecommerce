@@ -44,8 +44,8 @@ const UserCartDetails = () => {
           <h2>Order Items</h2>
           <ListGroup variant={'flush'}>
             {
-              Array.from({length:3}).map((item, i) => (
-                <CartItem key={i} />
+              Array.from({length: 3}).map((item, i) => (
+                  <CartItem item={{image: {path: '/images/tablets-category.png'}, name: 'Product name', price: 10, count: 10, quantity: 10}} key={i}/>
               ))
             }
           </ListGroup>

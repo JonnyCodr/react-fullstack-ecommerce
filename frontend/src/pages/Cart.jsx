@@ -17,8 +17,9 @@ const Cart = () => {
           <ListGroup variant='flush'>
             {
               Array.from({length: 3}).map((item, i) => (
-                  <CartItem key={i}/>
-              ))}
+                  <CartItem item={{image: {path: '/images/tablets-category.png'}, name: 'Product name', price: 10, count: 10, quantity: 10}} key={i}/>
+              ))
+            }
           </ListGroup>
           <Alert variant={'info'}>Your Cart Is Empty</Alert>
         </Col>
