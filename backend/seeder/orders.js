@@ -16,7 +16,7 @@ const orders = Array.from({length: 22}).map((_, idx) => {
     subtotal = 100;
   }
   return {
-    user: ObjectId(),
+    user: ObjectId('638bf3c267761dfd37afce4a'),
     orderTotal: {
       itemsCount: 3,
       cartSubtotal: subtotal
