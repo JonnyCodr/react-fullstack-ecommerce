@@ -1,15 +1,25 @@
-import React from 'react';
+import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import {Image, ListGroup} from "react-bootstrap";
-import {Rating} from "react-simple-star-rating";
+import { Image, ListGroup } from "react-bootstrap";
+import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import AddedToCartToast from "../components/AddedToCartToast";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
 
-const ProductDetails = () => {
+const ProductDetailsPage = () => {
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(addToCart());
+  };
+
+  const products = useSelector((state) => state.cart.value);
+
   return (
     <Container>
       <AddedToCartToast />
@@ -24,20 +34,29 @@ const ProductDetails = () => {
           <Row>
             <Col md={8}>
               <ListGroup variant="flush">
-                <ListGroup.Item><h1>Product Name</h1></ListGroup.Item>
+                <ListGroup.Item>
+                  <h1>Product Name</h1>
+                </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating readonly size={20} initialValue={4} /> (1)
                 </ListGroup.Item>
-                <ListGroup.Item>Price <span className='fw-bold'>$345</span></ListGroup.Item>
-                <ListGroup.Item>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Asperiores aut autem facere harum nemo nobis nostrum odio sapiente suscipit ullam!
-                  Aliquid asperiores dolorem eaque eligendi fugiat ipsum labore officia repellendus?</ListGroup.Item>
+                <ListGroup.Item>
+                  Price <span className="fw-bold">$345</span>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Asperiores aut autem facere harum nemo nobis nostrum odio
+                  sapiente suscipit ullam! Aliquid asperiores dolorem eaque
+                  eligendi fugiat ipsum labore officia repellendus?
+                </ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={4}>
               <ListGroup>
                 <ListGroup.Item>Status: in stock</ListGroup.Item>
-                <ListGroup.Item>Price: <span className={'fw-bold'}>$345</span></ListGroup.Item>
+                <ListGroup.Item>
+                  Price: <span className={"fw-bold"}>$345</span>
+                </ListGroup.Item>
                 <ListGroup.Item>
                   Quantity:
                   <Form.Select size="lg" aria-label="Default select example">
@@ -47,7 +66,9 @@ const ProductDetails = () => {
                   </Form.Select>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Button variant="danger">Add to cart</Button>
+                  <Button onClick={addToCartHandler} variant="danger">
+                    Add to cart
+                  </Button>
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -56,18 +77,18 @@ const ProductDetails = () => {
             <Col className="mt-5">
               <h5>REVIEWS</h5>
               <ListGroup variant="flush">
-                {
-                  Array.from({length: 10}).map((item, i) => (
-                    <ListGroup.Item key={i}>
-                      John Doe <br/>
-                      <Rating readonly size={20} initialValue={3} />
-                      <br/>
-                      20-09-2001 <br/>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi assumenda, blanditiis excepturi illum
-                      laboriosam nihil quibusdam quo repellat voluptas. Consectetur debitis est numquam rerum?
-                    </ListGroup.Item>
-                  ))
-                }
+                {Array.from({ length: 10 }).map((item, i) => (
+                  <ListGroup.Item key={i}>
+                    John Doe <br />
+                    <Rating readonly size={20} initialValue={3} />
+                    <br />
+                    20-09-2001 <br />
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Amet animi assumenda, blanditiis excepturi illum laboriosam
+                    nihil quibusdam quo repellat voluptas. Consectetur debitis
+                    est numquam rerum?
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </Col>
           </Row>
@@ -76,7 +97,8 @@ const ProductDetails = () => {
           <Form>
             <Form.Group
               className="mb-3"
-              controlId="exampleForm.ControlTextarea1">
+              controlId="exampleForm.ControlTextarea1"
+            >
               <Form.Label>Write your review</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
@@ -88,7 +110,9 @@ const ProductDetails = () => {
               <option value="4">4</option>
               <option value="5">5</option>
             </Form.Select>
-            <Button variant="primary" className={'mb-3 mt-3'}>Submit</Button>
+            <Button variant="primary" className={"mb-3 mt-3"}>
+              Submit
+            </Button>
           </Form>
         </Col>
       </Row>
@@ -96,4 +120,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;

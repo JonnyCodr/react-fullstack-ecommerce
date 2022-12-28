@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
+import Home from "./pages/Home";
 import ProductListPage from "./pages/ProductListPage";
-import ProductDetails from "./pages/ProductDetail";
+import ProductDetailsPage from "./pages/ProductDetailPage";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -33,30 +33,35 @@ function App() {
         <Route element={<RoutesWithUserChatComponent />}>
           <Route path="/" element={<Home />} />
           <Route path="/product-list" element={<ProductListPage />} />
-          <Route path="/product-details" element={<ProductDetails />} />
-          <Route path="/product-details/:id" element={<ProductDetails />} />
+          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route path="/product-details/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element="Page Not Found 404" />
         </Route>
 
-          <Route element={<ProtectedRoutesComponent admin={false} />}>
-            <Route path="/user" element={<UserProfile />} />
-            <Route path="/user/my-orders" element={<UserOrderPage />} />
-            <Route path="/user/cart-details" element={<UserCartDetails />} />
-            <Route path="/user/order-details" element={<UserOrderDetails />} />
-
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
+          <Route path="/user" element={<UserProfile />} />
+          <Route path="/user/my-orders" element={<UserOrderPage />} />
+          <Route path="/user/cart-details" element={<UserCartDetails />} />
+          <Route path="/user/order-details" element={<UserOrderDetails />} />
         </Route>
 
         <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/edit-user" element={<AdminEditUser />} />
           <Route path="/admin/products" element={<AdminProductsPage />} />
-          <Route path="/admin/create-new-product" element={<AdminCreateProductPage />} />
+          <Route
+            path="/admin/create-new-product"
+            element={<AdminCreateProductPage />}
+          />
           <Route path="/admin/edit-product" element={<AdminEditProduct />} />
           <Route path="/admin/orders" element={<AdminOrdersPage />} />
-          <Route path="/admin/order-detail/:id" element={<AdminOrderDetailsPage />} />
+          <Route
+            path="/admin/order-detail/:id"
+            element={<AdminOrderDetailsPage />}
+          />
           <Route path="/admin/chats" element={<AdminChats />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
         </Route>
